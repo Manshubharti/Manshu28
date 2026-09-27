@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --accent: #ffffff;
+            --text: #888;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--accent);
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background:linear-gradient(135deg,#000000, #1a1a1a, #2c2c2c);
+        }
+
+        .content {
+            text-align: left;
+            max-width: 500px;
+            padding: 20px;
+        }
+
+        .date {
+            color: var(--text);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: lighter;
+            margin-bottom: 40px;
+        }
+
+        .typing-text {
+            border-right: 1px solid var(--accent);
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 2.8s steps(40, end) forwards, blink 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink {
+        from, to { border-color: transparent }
+        50% { border-color: var(--accent) }
+        }
+
+        .message {
+            opacity: 0;
+            color: var(--text);
+            animation: fadeIn 2s ease forwards;
+            animation-delay: 4s;
+            line-height: 2;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Subtle floating particle effect */
+        .dot {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        /* floating hearts */
+        
+        .heart{
+        position:absolute;
+        color:#ff4d6d;
+        font-size:20px;
+        animation:float 6s linear infinite;
+        }
+        
+        @keyframes float{
+        0%{
+        transform:translateY(100vh);
+        opacity:0;
+        }
+        50%{
+        opacity:1;
+        }
+        100%{
+        transform:translateY(-10vh);
+        opacity:0;
+        }
+        }
+        
+        button{
+         align-item:center;
+         display:block;
+         margin: 20px auto;
+         border:solid;
+         border-color:rgb(108,117,125);
+         width:300px;
+         height:40px;
+         border-radius:20px;
+         color:rgb(108,117,125);
+         background:linear-gradient(135deg,gold,white,gold,white,gold);
+        }
+        
+        button:hover{
+         color:rgb(108,117,125);
+         background:linear-gradient(270deg,white,rgb(108,117,125));
+        }
+        
+        
+        .particle{
+        position:absolute;
+        width:5px;
+        height:5px;
+        background:white;
+        border-radius:50%;
+        pointer-events:none;
+        animation:explode 0.8s linear forwards;
+        }
+        
+        @keyframes explode{
+        0%{
+        transform:translate(0,0);
+        opacity:1;
+        }
+        
+        100%{
+        transform:translate(var(--x),var(--y));
+        opacity:0;
+        }
+        }
+        
+        
+        .particle{
+        position:absolute;
+        width:8px;
+        height:8px;
+        border-radius:50%;
+        pointer-events:none;
+        animation:firework 1.2s linear forwards;
+        }
+        
+        @keyframes firework{
+        
+        0%{
+        transform:translate(0,0) scale(1);
+        opacity:1;
+        }
+        
+        100%{
+        transform:translate(var(--x),var(--y)) scale(0);
+        opacity:0;
+        }
+        
+    </style>
+</head>
+<body>
+
+<audio id="music">
+	<source src="apna.mp3" type="audio/mpeg">
+</audio>
+
+    <div class="content">
+        <span class="date">28 September 2026</span>
+        <h1 class="typing-text">Happy Birthday.<br>Meri Bestie☺️<br>(Payal)</h1>
+        <div class="message">
+            Happy Birthday to someone who makes my every day a little brighter 🌸<br>
+            You are my one and only favourite person😌<br>
+            And i don't want to loose you😢<br>
+            May your life be full of happiness, success, and beautiful moments.
+            Keep smiling always 😊
+        </div>
+        <button onclick="toggleAudio()" id="tapBtn">Tap here!</button>
+    </div>
+
+    <script>
+        // Generate subtle background dots
+        for (let i = 0; i < 30; i++) {
+            let dot = document.createElement('div');
+            dot.className = 'dot';
+            let size = Math.random() * 3 + 'px';
+            dot.style.width = size;
+            dot.style.height = size;
+            dot.style.top = Math.random() * 100 + 'vh';
+            dot.style.left = Math.random() * 100 + 'vw';
+            document.body.appendChild(dot);
+        }
+        
+        let audio = document.getElementById("music")
+    	audio.currentTime = 18;
+    	
+    	function toggleAudio() {
+    		if (audio.paused) {
+    			audio.play();
+    		} else {
+    		   audio.pause();
+    		}
+    	}	
+    	
+    	/* hearts generator */
+    	
+    	setInterval(()=>{
+    	
+    	let heart = document.createElement("div");
+    	heart.className = "heart";
+    	heart.innerHTML = "❤";
+    	
+    	heart.style.left = Math.random()*100 + "vw";
+    	heart.style.fontSize = (Math.random()*20+10) + "px";
+    	heart.style.animationDuration = (Math.random()*3+4) + "s";
+    	
+    	document.body.appendChild(heart);
+    	
+    	setTimeout(()=>{
+    	heart.remove();
+    	},6000);
+    	
+    	},500);
+    	
+    	document.addEventListener("click",function(e){
+    	
+    	for(let i=0;i<50;i++){
+    	
+    	let particle=document.createElement("span");
+    	particle.classList.add("particle");
+    	
+    	let x=(Math.random()-0.5)*200+"px";
+    	let y=(Math.random()-0.5)*200+"px";
+    	
+    	particle.style.setProperty("--x",x);
+    	particle.style.setProperty("--y",y);
+    	
+    	particle.style.left=e.clientX+"px";
+    	particle.style.top=e.clientY+"px";
+    	
+    	document.body.appendChild(particle);
+    	
+    	setTimeout(()=>{
+    	particle.remove();
+    	},800);
+    	
+    	}
+    	
+    	});
+    	
+    	
+    	
+    	const btn = document.getElementById("tapBtn");
+    	
+    	btn.addEventListener("click", function(){
+    	
+    	const colors = ["#ff4d4d","#ffd700","#00ffff","#ff00ff","#00ff7f","#ffffff"];
+    	
+    	for(let i=0;i<150;i++){   // more fireworks
+    	
+    	let particle = document.createElement("span");
+    	particle.classList.add("particle");
+    	
+    	let startX = Math.random()*window.innerWidth;
+    	let startY = Math.random()*window.innerHeight;
+    	
+    	let moveX = (Math.random()-0.5)*300+"px";
+    	let moveY = (Math.random()-0.5)*300+"px";
+    	
+    	particle.style.left = startX+"px";
+    	particle.style.top = startY+"px";
+    	
+    	particle.style.setProperty("--x",moveX);
+    	particle.style.setProperty("--y",moveY);
+    	
+    	particle.style.background = colors[Math.floor(Math.random()*colors.length)];
+    	
+    	document.body.appendChild(particle);
+    	
+    	setTimeout(()=>{
+    	particle.remove();
+    	},1200);
+    	
+    	}
+    	
+    	});
+    </script>
+</body>
+</html>
